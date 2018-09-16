@@ -10,13 +10,13 @@ namespace Test\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Test\Domain\Customer;
+use Test\Domain\Discount;
 use Test\Domain\Order;
 use Test\Domain\OrderLine;
 use Test\Domain\Product;
 
 final class OrderTest extends TestCase
 {
-
     //To run tests : \vendor\bin>phpunit --bootstrap ../../vendor/autoload.php ../../tests
     /**
      * @test
@@ -33,6 +33,7 @@ final class OrderTest extends TestCase
         );
         $order = new Order($customer, $orderlines);
 
+        //without discount
         $this->assertEquals(
             $order->getCustomer()->getName(),
             $customer->getName()
@@ -46,6 +47,16 @@ final class OrderTest extends TestCase
         $this->assertEquals(
             $order->getTotal(),
             2500
+        );
+
+        //discount(s)
+        $discounts[] = new Discount(20,'20 euro omdat je getest wordt');
+
+        $order->setDiscounts($discounts);
+
+        $this->assertEquals(
+            $order->getTotalDiscountedAmount(),
+            20
         );
     }
 }

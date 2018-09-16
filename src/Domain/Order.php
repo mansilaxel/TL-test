@@ -31,6 +31,11 @@ class Order
     private $total;
 
     /**
+     * @var Discount[]
+     */
+    private $discounts;
+
+    /**
      * Order constructor.
      * @param Customer $customer
      * @param OrderLine[] $orderLines
@@ -45,6 +50,7 @@ class Order
         foreach ($orderLines as $item){
             $this->total+= $item->getTotal();
         }
+        $this->discounts = [];
     }
 
     /**
@@ -123,6 +129,34 @@ class Order
         $order->setId($json['id']);
 
         return $order;
+    }
+
+    /**
+     * @return Discount[]
+     */
+    public function getDiscounts(): array
+    {
+        return $this->discounts;
+    }
+
+    /**
+     * @param Discount[] $discounts
+     */
+    public function setDiscounts(array $discounts): void
+    {
+        $this->discounts = $discounts;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalDiscountedAmount(): float
+    {
+        $total = 0;
+        foreach ($this->discounts as $discount) {
+            $total+= $discount->getAmount();
+        }
+        return $total;
     }
 
 }

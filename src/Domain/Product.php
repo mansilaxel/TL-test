@@ -109,5 +109,18 @@ class Product
     {
         $this->price = $price;
     }
+
+    /**
+     * @param array $json
+     * @return Product
+     */
+    public static function createFromJson(array $json): self
+    {
+        $product = new Product($json['description'], $json['category'], $json['price']);
+        $id = $json['id'];
+
+        $product->setId($id);
+        return $product;
+    }
     
 }

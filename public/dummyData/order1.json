@@ -3,7 +3,7 @@
   "customer-id": "1",
   "items": [
     {
-      "product-id": "A102",
+      "product-id": "B102",
       "quantity": "10",
       "unit-price": "4.99",
       "total": "49.90"

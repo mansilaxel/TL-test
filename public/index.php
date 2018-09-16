@@ -15,7 +15,7 @@ $app = new App();
 
 $app->any('/', function (){
     // Run app: \public>php -S localhost:8080  index.php
-    return 'Hello world!' . '- /api/order/{id}';
+    return file_get_contents(__DIR__ .'/index.html');
 });
 
 $app->group('/api', function () {

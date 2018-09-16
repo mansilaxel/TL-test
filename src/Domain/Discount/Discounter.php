@@ -20,7 +20,7 @@ class Discounter
     public function __construct()
     {
         $this->discountRules [] = new OnTotalDiscountRule(1000,0.1);
-        $this->discountRules [] = new BuyCategoryOneFreeDiscountRule(1,5);
+        $this->discountRules [] = new BuyCategoryOneFreeDiscountRule(2,5);
         $this->discountRules [] = new BuyCategoryCheapestProductDiscountRule(1,2,0.1);
 
         //own rule since no order has a total over 1000
@@ -49,11 +49,12 @@ class Discounter
                 $discounts[] = $discount;
             }
         }
-        $order->setDiscounts($discounts);
 
-        $newTotal = $order->getTotal() - $order->getTotalDiscountedAmount();
-        $order->setTotal($newTotal);
-        return $newTotal;
+        if (count($discounts) >= 1) {
+            $order->setDiscounts($discounts);
+            $order->setTotal($order->getTotal() - $order->getTotalDiscountedAmount());
+        }
+        return $order->getTotal();
     }
 
     /**
@@ -69,13 +70,14 @@ class Discounter
             if (!is_null($discount)){
                 $discounts[] = $discount;
             }
-
         }
-        $bestOne[] = $this->getMostOptimalDiscount($discounts, $low);
-        $order->setDiscounts($bestOne);
-        $newTotal = $order->getTotal() - $order->getTotalDiscountedAmount();
-        $order->setTotal($newTotal);
-        return $newTotal;
+
+        if (count($discounts) >= 1) {
+            $bestOne[] = $this->getMostOptimalDiscount($discounts, $low);
+            $order->setDiscounts($bestOne);
+            $order->setTotal($order->getTotal() - $order->getTotalDiscountedAmount());
+        }
+        return $order->getTotal();
     }
 
     /**

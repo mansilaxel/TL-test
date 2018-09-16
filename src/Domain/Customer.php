@@ -19,6 +19,7 @@ class Customer
      * @var string
      */
     private $name;
+    
     /**
      * @var float
      */

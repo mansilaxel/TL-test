@@ -19,10 +19,12 @@ class Product
      * @var string
      */
     private $description;
+
     /**
      * @var int
      */
     private $category;
+
     /**
      * @var float
      */

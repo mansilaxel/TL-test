@@ -85,4 +85,17 @@ class Customer
     {
         $this->revenue = $revenue;
     }
+
+    /**
+     * @param array $json
+     * @return Customer
+     */
+    public static function createFromJson(array $json): self
+    {
+        $customer = new Customer($json['name'], $json['revenue']);
+        $id = $json['id'];
+
+        $customer->setId($id);
+        return $customer;
+    }
 }

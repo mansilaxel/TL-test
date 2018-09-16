@@ -8,6 +8,8 @@
 
 namespace Test\Domain;
 
+use Test\Domain\Discount\Discount;
+
 class Order
 {
     /**

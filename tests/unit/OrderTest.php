@@ -10,7 +10,7 @@ namespace Test\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Test\Domain\Customer;
-use Test\Domain\Discount;
+use Test\Domain\Discount\Discount;
 use Test\Domain\Order;
 use Test\Domain\OrderLine;
 use Test\Domain\Product;

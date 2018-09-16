@@ -6,7 +6,7 @@
  * Time: 14:21
  */
 
-namespace Test\Domain;
+namespace Test\Domain\Discount;
 
 class Discount
 {

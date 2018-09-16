@@ -38,7 +38,7 @@ class Discount
      */
     public function getAmount(): float
     {
-        return $this->amount;
+        return round($this->amount, 2);
     }
 
     /**

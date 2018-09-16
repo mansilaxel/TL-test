@@ -111,4 +111,18 @@ class Order
         $this->total = $total;
     }
 
+    /**
+     * @param array $json
+     * @param Customer $customer
+     * @param array $orderLines
+     * @return Order
+     */
+    public static function createFromJson(array $json, Customer $customer, array $orderLines): self
+    {
+        $order = new Order($customer, $orderLines);
+        $order->setId($json['id']);
+
+        return $order;
+    }
+
 }

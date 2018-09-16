@@ -9,6 +9,7 @@
 namespace Test\Tests\Database;
 
 use PHPUnit\Framework\TestCase;
+use Exception;
 use Test\Database\CustomerRepository;
 
 final class CustomerRepositoryTest extends TestCase
@@ -34,5 +35,14 @@ final class CustomerRepositoryTest extends TestCase
             $result->getName(),
             'Coca Cola'
         );
+    }
+
+    /**
+     * @test
+     */
+    public function itThrowsWhenFindCustomerByIdFails(): void
+    {
+        $this->expectException(Exception::class);
+        $this->customerRepository->findById(9999999);
     }
 }

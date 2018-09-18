@@ -70,6 +70,9 @@ class OrderInfoRequestHandler
             $this->fractal->createData(
                 new Item($data, new OrderTransformer($this->fractal)))
                 ->toArray()
-            );
+            )
+            ->withHeader('Access-Control-Allow-Origin','*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     }
 }

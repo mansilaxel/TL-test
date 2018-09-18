@@ -37,11 +37,14 @@ class OrderTransformer extends TransformerAbstract
         $data = [
             'id' => $order->getId(),
             'customer-id' => $order->getCustomer()->getId(),
-            'items' => [
-                $this->fractal->createData(
-                    new Collection($order->getOrderLines(), new OrderLineTransformer()))
-                    ->toArray()
-            ],
+            'items' => $this->fractal->createData(
+                new Collection($order->getOrderLines(), new OrderLineTransformer()))
+                ->toArray()
+            ,
+            'discounts' => $this->fractal->createData(
+                new Collection($order->getDiscounts(), new DiscountTransformer()))
+                ->toArray()
+            ,
             'total' => $order->getTotal(),
         ];
 

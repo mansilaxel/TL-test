@@ -22,7 +22,7 @@ class OrderLineTransformer extends TransformerAbstract
         $data = [
             'product-id' => $orderLine->getProduct()->getId(),
             'quantity' => $orderLine->getQuantity(),
-            'unit-price"' => $orderLine->getProduct()->getPrice(),
+            'unit-price' => $orderLine->getProduct()->getPrice(),
             'total' => $orderLine->getTotal(),
         ];
 

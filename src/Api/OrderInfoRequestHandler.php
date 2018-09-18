@@ -10,11 +10,10 @@ namespace Test\Api;
 
 use Exception;
 use League\Fractal\Manager;
-use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Test\Api\Transformers\DiscountTransformer;
-use Test\Api\Transformers\OrderLineTransformer;
+use Test\Api\Transformers\OrderTransformer;
 use Test\Database\OrderRepository;
 use Test\Domain\Discount\Discounter;
 
@@ -68,24 +67,9 @@ class OrderInfoRequestHandler
 
 
         return $response->withJson(
-            [
-                'data' =>
-                    [
-                        'id' => $data->getId(),
-                        'customer-id' => $data->getCustomer()->getId(),
-                        'items' => [
-                            $this->fractal->createData(
-                                new Collection($data->getOrderLines(), new OrderLineTransformer()))
-                                ->toArray()
-                        ],
-                        'discounts' => [
-                            $this->fractal->createData(
-                                new Collection($data->getDiscounts(), new DiscountTransformer()))
-                                ->toArray()
-                        ],
-                        'total' => $data->getTotal(),
-                    ]
-            ]
-        );
+            $this->fractal->createData(
+                new Item($data, new OrderTransformer($this->fractal)))
+                ->toArray()
+            );
     }
 }

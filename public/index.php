@@ -8,6 +8,7 @@
 
 use Slim\App;
 use Test\Api\OrderInfoRequestHandler;
+use Test\Api\OrderListRequestHandler;
 
 require_once '../vendor/autoload.php';
 
@@ -20,6 +21,7 @@ $app->any('/', function (){
 
 $app->group('/api', function () {
     $this->any('/order/{id}', OrderInfoRequestHandler::class);
+    $this->any('/orders', OrderListRequestHandler::class);
 });
 
 $app->run();

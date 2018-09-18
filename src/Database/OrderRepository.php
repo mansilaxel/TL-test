@@ -57,6 +57,22 @@ class OrderRepository
     }
 
     /**
+     * @return Order[]
+     */
+    public function findAll(): array
+    {
+        $orders = array_map( function ($order) {
+            return Order::createFromJson(
+                $order,
+                $this->findCustomer($order['customer-id']),
+                $this->findOrderLines($order['items'])
+            );
+        }, $this->data);
+
+        return $orders;
+    }
+
+    /**
      * @param string $id
      * @return Customer
      * @throws Exception

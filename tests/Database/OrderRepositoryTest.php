@@ -60,4 +60,17 @@ final class OrderRepositoryTest extends TestCase
         $this->expectException(Exception::class);
         $this->orderRepository->findById(999999);
     }
+
+    /**
+     * @test
+     */
+    public function itFindsAllOrders(): void
+    {
+        $result = $this->orderRepository->findAll();
+
+        $this->assertEquals(
+            count($result),
+            3
+        );
+    }
 }

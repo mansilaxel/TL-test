@@ -32,4 +32,16 @@ class ProductRepository
         }
         throw new Exception('Product with id ' . $id .  ' does not exist');
     }
+
+    /**
+     * @return Product[]
+     */
+    public function findAll(): array
+    {
+        $products = array_map( function ($product) {
+            return Product::createFromJson($product);
+        }, $this->data);
+
+        return $products;
+    }
 }

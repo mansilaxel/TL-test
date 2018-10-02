@@ -45,6 +45,7 @@ class OrderTransformer extends TransformerAbstract
                 new Collection($order->getDiscounts(), new DiscountTransformer()))
                 ->toArray()
             ,
+            'total-discount' => $order->getTotalDiscountedAmount(),
             'total' => $order->getTotal(),
         ];
 

@@ -158,7 +158,7 @@ class Order
         foreach ($this->discounts as $discount) {
             $total+= $discount->getAmount();
         }
-        return $total;
+        return round($total, 2);
     }
 
 }
